@@ -181,13 +181,3 @@ def player_numbers(team_name)
 	    end
 	  end
 	end
-
-def player_stats(player)
-  game_hash.each do |team_key, team_hash|
-    team_hash[:players].each do |key, value|
-      if team_hash[:players] == player
-        return value
-      end
-    end
-  end
-end
