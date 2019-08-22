@@ -170,7 +170,6 @@ def player_stats(player)
   new_hash = {}
   game_hash.each do |team_key, team_hash|
     team_hash[:players].each do |key, value|
-      binding.pry
       if team_hash[:players] == player
         new_hash = value
       else
