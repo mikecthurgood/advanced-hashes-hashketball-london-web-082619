@@ -216,14 +216,14 @@ def most_points_scored
 end
 
 def winning_team
-	  home_team_points_total = 0
-	  away_team_points_total = 0
+	  home_points = 0
+	  away_points = 0
 	  game_hash.each do |location, team|
 	    if location == :home
 	      team.each do |attribute, data|
 	        if attribute == :players
 	          data.each do |player, stats|
-	            home_team_points_total += stats[:points]
+	            home_points += stats[:points]
 	          end
 	        end
 	      end
@@ -231,20 +231,56 @@ def winning_team
 	      team.each do |attribute, data|
 	        if attribute == :players
 	          data.each do |player, stats|
-	            away_team_points_total += stats[:points]
+	            away_points_ += stats[:points]
 	          end
 	        end
 	      end
 	    end
 	  end
-	  if home_team_points_total > away_team_points_total
+	  if home_points > away_points
 	    return game_hash[:home][:team_name]
 	  else
 	    return game_hash[:away][:team_name]
 	  end
 	end
+
+def player_with_longest_name
+	  longest_name_length = 0
+	  player_with_longest_name = "player"
+	  game_hash.each do |location, team|
+	    team.each do |attribute, data|
+	      if attribute == :players
+	        data.each do |player, stats|
+	          if player.length > longest_name_length
+	            longest_name_length = player.length
+	            player_with_longest_name = player
+	          end
+	        end
+	      end
+	    end
+	  end
+	  player_with_longest_name
+	end
 	
-        
+	 def long_name_steals_a_ton?
+	  best_steals = 0
+	  player_with_best_steals = "player"
+	  game_hash.each do |location, team|
+	    team.each do |attribute, data|
+	      if attribute == :players
+	        data.each do |player, stats|
+	          if stats[:steals] > best_steals
+	            best_steals = stats[:steals]
+	            player_with_best_steals = player
+	          end
+	        end
+	      end
+	    end
+	  end
+	  if player_with_best_steals == player_with_longest_name
+	    return true
+	  end
+	end  
       
     
     
