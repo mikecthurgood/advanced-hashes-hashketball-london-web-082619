@@ -206,7 +206,7 @@ def most_points_scored
     team_hash[:players].each do |key, value|
       if value[:points] > points
         points = value[:points]
-        high_scorer = value
+        high_scorer = key
       else
         next
       end
