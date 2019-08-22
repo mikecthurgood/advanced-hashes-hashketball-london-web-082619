@@ -231,7 +231,7 @@ def winning_team
 	      team.each do |attribute, data|
 	        if attribute == :players
 	          data.each do |player, stats|
-	            away_points_ += stats[:points]
+	            away_points += stats[:points]
 	          end
 	        end
 	      end
