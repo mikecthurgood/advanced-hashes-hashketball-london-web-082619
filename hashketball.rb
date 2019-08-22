@@ -229,9 +229,9 @@ def winning_team
       end
     end
     if home_points > away_points
-      team_key[:home][:team_name]
+      team_key[:home][:team_name].to_string
     elsif
-      team_key[:away][:team_name]
+      team_key[:away][:team_name].to_string
     else
       "It's a draw!"
     end
