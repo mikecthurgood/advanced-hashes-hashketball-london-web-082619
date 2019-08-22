@@ -216,28 +216,34 @@ def most_points_scored
 end
 
 def winning_team
-  home_points = 0
-  away_points = 0
-  game_hash.each do |team_key, team_hash|
-    if team_key = :home
-      team_hash[:players].each do |key, value|
-        home_points += value[:points]
-      end
-    else 
-      team_hash[:players].each do |key, value|
-        away_points += value[:points]
-      end
-    end
-    if home_points > away_points
-      team_key[:home][:team_name].to_string
-    elsif
-      team_key[:away][:team_name].to_string
-    else
-      "It's a draw!"
-    end
-  end
-end
-
+	  home_team_points_total = 0
+	  away_team_points_total = 0
+	  game_hash.each do |location, team|
+	    if location == :home
+	      team.each do |attribute, data|
+	        if attribute == :players
+	          data.each do |player, stats|
+	            home_team_points_total += stats[:points]
+	          end
+	        end
+	      end
+	    else
+	      team.each do |attribute, data|
+	        if attribute == :players
+	          data.each do |player, stats|
+	            away_team_points_total += stats[:points]
+	          end
+	        end
+	      end
+	    end
+	  end
+	  if home_team_points_total > away_team_points_total
+	    return game_hash[:home][:team_name]
+	  else
+	    return game_hash[:away][:team_name]
+	  end
+	end
+	
         
       
     
