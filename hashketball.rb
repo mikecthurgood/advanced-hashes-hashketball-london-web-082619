@@ -152,19 +152,21 @@ def team_names
   end
 end
 
-def player_numbers(team)
-  new_array = []
-  game_hash.each do |team_key, team_hash|
-    if team_hash[:team_name] == team
-      team_hash[:players].each do |players|
-        players.each do |key, value|
-          new_array << value[:number]
-        end
-      end
-    end
-  end
-  new_array
-end
+def player_numbers(team_name)
+	  jersey_numbers = []
+	  game_hash.each do |team_key, team_hash|
+	    if team[:team_name] == team_name
+	      team_hash.each do |key, value|
+	        if key == :players
+	          value.each do |player, stats|
+	            jersey_numbers << stats[:number]
+	          end
+	        end
+	      end
+	    end
+	  end
+	  jersey_numbers
+	end
 
 def player_stats(player)
   new_hash = {}
