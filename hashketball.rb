@@ -1,3 +1,5 @@
+require "pry"
+
 def game_hash
    {
      :home => {
@@ -70,7 +72,7 @@ def game_hash
            blocks: 7,
            slam_dunks: 2
          },
-         "Bismak Biyombo" => {
+         "Bismack Biyombo" => {
            number: 0,
            shoe: 16,
            points: 12,
@@ -114,12 +116,67 @@ def game_hash
      }
    }
  end
+ 
 
+def num_points_scored(player)
+  game_hash.each do |team_key, team_hash|
+    team_hash[:players].each do |key, value|
+      if key == player
+        return value[:points]
+      end
+    end 
+  end
+end
 
+def shoe_size(player)
+  game_hash.each do |team_key, team_hash|
+    team_hash[:players].each do |key, value|
+      if key == player
+        return value[:shoe]
+      end
+    end 
+  end
+end
 
+def team_colors(team)
+  game_hash.each do |team_key, team_hash|
+    if team_hash[:team_name] == team
+      return team_hash[:colors]
+    end
+  end
+end
 
+def team_names
+  game_hash.map do |team_key, team_hash|
+    team_hash[:team_name]
+  end
+end
 
+def player_numbers(team)
+  new_array = []
+  game_hash.each do |team_key, team_hash|
+    if team_hash[:team_name] == team
+      team_hash[:players].each do |players|
+        players.each do |key, value|
+          new_array << value[:number]
+        end
+      end
+    end
+  end
+  new_array
+end
 
-
-
-
+def player_stats(player)
+  new_hash = {}
+  game_hash.each do |team_key, team_hash|
+    team_hash[:players].each do |key, value|
+      binding.pry
+      if team_hash[:players] == player
+        new_hash = value
+      else
+        next
+      end
+    end
+  end
+  new_hash
+end
