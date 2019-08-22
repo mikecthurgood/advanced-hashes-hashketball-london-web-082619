@@ -168,14 +168,25 @@ def player_numbers(team_name)
 	  jersey_numbers
 	end
 
+ def player_stats(player_name)
+	  game_hash.each do |location, team|
+	    team.each do |attribute, data|
+	     if attribute == :players
+	       data.each do |player, stats|
+	        if player == player_name
+	          return stats
+	        end
+	       end
+	      end
+	    end
+	  end
+	end
+
 def player_stats(player)
-  new_hash = {}
   game_hash.each do |team_key, team_hash|
     team_hash[:players].each do |key, value|
       if team_hash[:players] == player
-        new_hash = value
-      else
-        next
+        return value
       end
     end
   end
